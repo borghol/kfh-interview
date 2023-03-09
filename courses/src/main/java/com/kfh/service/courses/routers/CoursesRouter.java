@@ -25,7 +25,8 @@ public class CoursesRouter {
   public RouterFunction<ServerResponse> courseRoutes() {
     return RouterFunctions
       .route(PUT(COURSE_ID_ROUTE).and(accept(MediaType.APPLICATION_JSON)), routerHandler::saveCourse)
-      .andRoute(GET(COURSE_ID_ROUTE).and(accept(MediaType.APPLICATION_JSON)), routerHandler::getCourse)
+      .andRoute(GET(COURSE_ID_ROUTE), routerHandler::getCourse)
+      .andRoute(GET("/"), routerHandler::getCourses)
       .andRoute(DELETE(COURSE_ID_ROUTE).and(accept(MediaType.APPLICATION_JSON)), routerHandler::deleteCourse);
   }
 }

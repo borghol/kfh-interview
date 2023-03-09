@@ -63,4 +63,11 @@ public class CoursesRouterHandler {
         .switchIfEmpty(ServerResponse.notFound().build())
         .doOnError(err -> LOG.error("Failed to get course: {}", courseId, err));
   }
+
+  public Mono<ServerResponse> getCourses(ServerRequest request) {
+    return Mono.just(repository.findAll())
+        .flatMap(course -> ServerResponse.ok().bodyValue(course))
+        .switchIfEmpty(ServerResponse.notFound().build())
+        .doOnError(err -> LOG.error("Failed to get courses", err));
+  }
 }
